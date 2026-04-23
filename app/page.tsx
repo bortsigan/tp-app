@@ -16,12 +16,12 @@ export default function Home() {
         <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-10 px-4 py-16 sm:px-6 lg:py-24">
           <div className="flex flex-col gap-6">
             <span className="w-fit rounded-full border border-black/10 bg-white/60 px-3 py-1 text-xs font-medium uppercase tracking-wider text-zinc-600 dark:border-white/10 dark:bg-black/40 dark:text-zinc-300">
-              Print-on-demand · Philippines
+              Print-on-demand · PH
             </span>
             <h1 className="text-4xl font-extrabold tracking-tight sm:text-6xl">
               Wear your <span className="text-red-600">story</span>.
               <br />
-              Print your <span className="text-blue-600">vibe</span>.
+              <span className="text-yellow-400">Print</span> your <span className="text-blue-600">vibe</span>.
             </h1>
             <p className="max-w-lg text-lg text-zinc-600 dark:text-zinc-300">
               Shop ready-made tees or build your own from scratch. Pick your color,

@@ -16,7 +16,7 @@ type CartContextValue = {
 const CartContext = createContext<CartContextValue | null>(null);
 
 /**
- * localStorage key. Bump the version if the CartItem shape ever changes
+ * localStorage key. Update the version if the CartItem shape ever changes
  * so old carts don't blow up on load.
  *
  * @var string
