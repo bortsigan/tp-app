@@ -1,12 +1,19 @@
 import Link from "next/link";
-import { TshirtPreview } from "./components/TshirtPreview";
-import { COLOR_MAP } from "./lib/designs";
+import { TshirtCard } from "./components/TshirtCard";
+import { TshirtImage } from "./components/TshirtImage";
+import { CATALOG } from "./lib/catalog";
+import { formatPHP } from "./lib/format";
 
 export default function Home() {
+  /** @var CatalogTshirt[] Picked straight from the shop — these are the same items for sale. */
+  const featured = CATALOG.slice(0, 4);
+  const hero = CATALOG[0];
+  const heroSide = CATALOG.slice(1, 3);
+
   return (
     <div className="flex flex-1 flex-col">
       <section className="relative overflow-hidden border-b border-black/10 dark:border-white/10">
-        <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-10 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:py-24">
+        <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-10 px-4 py-16 sm:px-6 lg:py-24">
           <div className="flex flex-col gap-6">
             <span className="w-fit rounded-full border border-black/10 bg-white/60 px-3 py-1 text-xs font-medium uppercase tracking-wider text-zinc-600 dark:border-white/10 dark:bg-black/40 dark:text-zinc-300">
               Print-on-demand · Philippines
@@ -36,63 +43,33 @@ export default function Home() {
               </Link>
             </div>
           </div>
-
-          <div className="relative flex items-center justify-center">
-            <div className="absolute -left-6 top-8 rotate-[-8deg] opacity-90">
-              <TshirtPreview color={COLOR_MAP["red"]} designId="fire" placement="front-center" size={220} />
-            </div>
-            <div className="relative z-10">
-              <TshirtPreview
-                color={COLOR_MAP["black"]}
-                designId="dragon"
-                placement="front-center"
-                size={320}
-              />
-            </div>
-            <div className="absolute -right-6 bottom-2 rotate-[8deg] opacity-90">
-              <TshirtPreview
-                color={COLOR_MAP["mustard"]}
-                designId="tiger"
-                placement="front-center"
-                size={220}
-              />
-            </div>
-          </div>
         </div>
       </section>
 
-      <section className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-6 px-4 py-16 sm:grid-cols-3 sm:px-6">
-        <Feature
-          title="Shop ready-made"
-          body="Sort by price, filter by color, search by name. Add to cart in seconds."
-          href="/shop"
-          cta="Go to shop"
-        />
-        <Feature
-          title="Customize anything"
-          body="Pick a shirt color, choose a design, decide the placement, lock the size."
-          href="/customize"
-          cta="Start designing"
-        />
-        <Feature
-          title="Pinoy sizing"
-          body="XSS (babies), XS, S, M, L, XL, XXL. Sizes that actually fit us."
-          href="/shop"
-          cta="See the fit"
-        />
-      </section>
-    </div>
-  );
-}
+      <section className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6">
+        <div className="mb-6 flex items-end justify-between gap-4">
+          <div>
+            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
+              Featured tees
+            </h2>
+            <p className="text-sm text-zinc-500 dark:text-zinc-400">
+              A quick look at what&apos;s on the rack right now.
+            </p>
+          </div>
+          <Link
+            href="/shop"
+            className="shrink-0 text-sm font-semibold underline underline-offset-4"
+          >
+            See all {CATALOG.length} →
+          </Link>
+        </div>
 
-function Feature({ title, body, href, cta }: { title: string; body: string; href: string; cta: string }) {
-  return (
-    <div className="flex flex-col gap-3 rounded-2xl border border-black/10 bg-white p-6 dark:border-white/10 dark:bg-zinc-900">
-      <h3 className="text-lg font-bold">{title}</h3>
-      <p className="text-sm text-zinc-600 dark:text-zinc-400">{body}</p>
-      <Link href={href} className="mt-auto w-fit text-sm font-semibold underline underline-offset-4">
-        {cta} →
-      </Link>
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {featured.map((tee) => (
+            <TshirtCard key={tee.id} tee={tee} />
+          ))}
+        </div>
+      </section>
     </div>
   );
 }
