@@ -18,6 +18,9 @@ export const metadata: Metadata = {
   title: "The Press PH — Custom Tee-Shirt Printing",
   description:
     "Shop ready-made tees or customize your own. Pick a color, design, placement, and Filipino size. Add to cart.",
+  icons: {
+    icon: "/icon.svg",
+  },
 };
 
 export default function RootLayout({
