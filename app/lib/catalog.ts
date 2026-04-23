@@ -3,7 +3,7 @@ import { COLOR_MAP } from "./designs";
 
 /**
  * Placeholder catalog. Using Unsplash URLs for now so the shop
- * actually looks like a shop. Any dead link just falls back to the
+ * actually looks like a shop. Any unavailable link just falls back to the
  * SVG mockup, so we don't get broken image icons.
  *
  * When the real product shoots are done:

@@ -24,12 +24,12 @@ type Props = {
 };
 
 /**
- * Product image with a jeweler's-loupe style hover zoom.
+ * Product image with a jeweler's-loupe | magnifying glass style hover zoom.
  * Move the cursor over the image and a circle follows, showing
  * whatever pixel is under the cursor at a higher resolution.
  *
  * If there's no real image to zoom into, just show the SVG mockup
- * (no point magnifying a vector — it's already sharp at any size).
+ * (no point magnifying a vector — it's already good at any size).
  */
 export function TshirtImageZoom({
   imageUrl,

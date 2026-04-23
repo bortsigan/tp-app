@@ -23,8 +23,8 @@ type Props = {
 
 /**
  * Thin wrapper over next/image. If there's no URL or the image
- * fails to load, we quietly swap in the SVG mockup instead of
- * showing a broken image icon. Keeps the shop looking intentional
+ * fails to load, we swap in the SVG mockup instead of
+ * showing a bad image icon. Keeps the shop looking intentional
  * even while we're still waiting for real product photos.
  */
 export function TshirtImage({

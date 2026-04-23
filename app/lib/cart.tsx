@@ -27,7 +27,7 @@ function genId(): string {
   if (typeof crypto !== "undefined" && "randomUUID" in crypto) {
     return crypto.randomUUID();
   }
-  // Really old browser? Fine, here's a best-effort fallback.
+
   return `${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
 }
 
@@ -35,7 +35,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
   const [hydrated, setHydrated] = useState(false);
 
-  // Pull the saved cart on first mount. Runs in the browser only.
+  // Pull the saved cart on first mount. Browser only available.
   useEffect(() => {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
@@ -45,26 +45,22 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
           setItems(parsed as CartItem[]);
         }
       }
-    } catch {
-      // Corrupted JSON? Just start fresh, not worth crashing the app.
-    }
+    } catch { /* No catch */ }
     setHydrated(true);
   }, []);
 
   // Save back to storage whenever the cart changes. Wait for hydration
-  // first, otherwise the initial empty state would clobber saved data.
+  // first, otherwise the initial empty state would remove saved data.
   useEffect(() => {
     if (!hydrated) return;
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
-    } catch {
-      // Quota full or private mode — nothing we can do, move on.
-    }
+    } catch { /* No catch */ }
   }, [items, hydrated]);
 
   const addItem = useCallback((item: Omit<CartItem, "id">) => {
     setItems((prev) => {
-      // If the exact same shirt is already in the cart, just bump qty
+      // If the exact same shirt is already in the cart, just use qty
       // instead of adding a second line.
       const idx = prev.findIndex(
         (p) =>
